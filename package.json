@@ -1,0 +1,25 @@
+{
+  "name": "js_calculator",
+  "version": "1.0.0",
+  "description": "freeCodeCampProject",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SokurV/jsCalculator.git"
+  },
+  "keywords": [
+    "javascript",
+    "js",
+    "react",
+    "web-dev"
+  ],
+  "author": "Sokur Vadim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SokurV/jsCalculator/issues"
+  },
+  "homepage": "https://github.com/SokurV/jsCalculator#readme"
+}
