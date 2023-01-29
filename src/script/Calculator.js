@@ -67,50 +67,16 @@ export default class JsCalculator extends React.Component{
                 }
             })
         }
+        
+        
 
-        if(targetID == 'add'){
+        if(['add', 'subtract', 'multiply', 'divide', 'equals'].indexOf(targetID) >= 0){
            this.setState(function(){
                 return {
-                    operationID: 'add'
+                    operationID: targetID
                 }
            })
            this.calculate(this.state.operationID)
-        }
-
-        if(targetID == 'subtract'){
-            this.setState(function(){
-                return {
-                    operationID: 'subtract'
-                }
-            })
-            this.calculate(this.state.operationID)
-        }
-
-        if(targetID == 'multiply'){
-            this.setState(function(){
-                return {
-                    operationID: 'multiply'
-                }
-            })
-            this.calculate(this.state.operationID)
-        }
-
-        if(targetID == 'divide'){
-            this.setState(function(){
-                return {
-                    operationID: 'divide'
-                }
-            })
-            this.calculate(this.state.operationID)
-        }
-
-        if(targetID == 'equals'){
-            this.setState(function(){
-                return {
-                    operationID: 'default'
-                }
-            })
-            this.calculate(this.state.operationID)
         }
     }
 
@@ -155,6 +121,13 @@ export default class JsCalculator extends React.Component{
                 this.setState(function(){
                     return {
                         memory: current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            case 'equals': 
+                this.setState(function(){
+                    return {
                         currentValue: ''
                     }
                 })
