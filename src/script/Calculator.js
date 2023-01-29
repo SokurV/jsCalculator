@@ -46,7 +46,7 @@ export default class JsCalculator extends React.Component{
 
         if(targetID == 'decimal'){
             let currentValue = this.state.currentValue
-            if(currentValue.length === '0'){
+            if(currentValue.length === 0){
                 currentValue = '0.'
             } else if(currentValue.indexOf('.') === -1) {
                 currentValue += '.' 
