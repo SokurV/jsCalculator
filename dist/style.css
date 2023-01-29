@@ -1,0 +1,160 @@
+/*!********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/sass/index.sass ***!
+  \********************************************************************************************************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.appContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appContainer_theme {
+  background-color: #555;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  max-height: 500px;
+}
+
+.calculator_theme {
+  background-color: black;
+  border: 2px solid orange;
+}
+
+.display {
+  margin: 4px;
+  margin-bottom: 0px;
+}
+
+.display__field {
+  width: 338px;
+  height: 36px;
+}
+
+.display__field_theme {
+  background-color: #555;
+}
+
+.display__text {
+  display: block;
+  margin-right: 8px;
+}
+
+.display_result_theme {
+  text-align: right;
+  font-family: Verdana;
+  color: orange;
+  font-size: 1.25em;
+}
+
+.display_input_theme {
+  text-align: right;
+  font-family: Verdana;
+  color: white;
+  font-size: 1.25em;
+}
+
+.buttonsContainer {
+  margin: 4px;
+  display: grid;
+  grid-template-areas: "buttonID_clear buttonID_clear buttonID_divide buttonID_multiply" "buttonID_7 buttonID_8 buttonID_9 buttonID_subtract" "buttonID_4 buttonID_5 buttonID_6 buttonID_add" "buttonID_1 buttonID_2 buttonID_3 buttonID_equals" "buttonID_0 buttonID_0 buttonID_decimal buttonID_equals";
+}
+
+.button {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_theme {
+  background-color: #555;
+  border: 1px solid black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.25em;
+  color: white;
+  cursor: pointer;
+}
+
+.button_theme:hover {
+  border: 1px solid #ccc;
+  color: orange;
+}
+
+.buttonID_0 {
+  grid-area: buttonID_0;
+}
+
+.buttonID_1 {
+  grid-area: buttonID_1;
+}
+
+.buttonID_2 {
+  grid-area: buttonID_2;
+}
+
+.buttonID_3 {
+  grid-area: buttonID_3;
+}
+
+.buttonID_4 {
+  grid-area: buttonID_4;
+}
+
+.buttonID_5 {
+  grid-area: buttonID_5;
+}
+
+.buttonID_6 {
+  grid-area: buttonID_6;
+}
+
+.buttonID_7 {
+  grid-area: buttonID_7;
+}
+
+.buttonID_8 {
+  grid-area: buttonID_8;
+}
+
+.buttonID_9 {
+  grid-area: buttonID_9;
+}
+
+.buttonID_equals {
+  grid-area: buttonID_equals;
+}
+
+.buttonID_add {
+  grid-area: buttonID_add;
+}
+
+.buttonID_subtract {
+  grid-area: buttonID_subtract;
+}
+
+.buttonID_multiply {
+  grid-area: buttonID_multiply;
+}
+
+.buttonID_divide {
+  grid-area: buttonID_divide;
+}
+
+.buttonID_decimal {
+  grid-area: buttonID_decimal;
+}
+
+.buttonID_clear {
+  grid-area: buttonID_clear;
+}
