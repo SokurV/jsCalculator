@@ -5,14 +5,13 @@ export default class JsCalculator extends React.Component{
         super(props)
         this.state = {
             currentValue: '',
-            prevValue: 0,
-            resultValue: 0,
-            resultField: '',
-            inputField: []
+            memory: 0,
+            operationID: 'default',
         }
         this.numericButtonRender = this.numericButtonRender.bind(this)
         this.symbolButtonRender = this.symbolButtonRender.bind(this)
         this.numericButtonCallback = this.numericButtonCallback.bind(this)
+        this.calculate = this.calculate.bind(this)
     }
 
     numericButtonRender(number = 9){
@@ -34,8 +33,135 @@ export default class JsCalculator extends React.Component{
     }
 
     numericButtonCallback(event){
+        const stringValue = event.target.textContent
+        if(Number(stringValue) >= 0 && Number(stringValue) <= 9){
+            this.setState(function(prevState){
+                return {
+                    currentValue: prevState['currentValue'] + stringValue
+                }
+            })
+        }
+
+        const targetID = event.target.getAttribute('id')
+
+        if(targetID == 'decimal'){
+            let currentValue = this.state.currentValue
+            if(currentValue.length === '0'){
+                currentValue = '0.'
+            } else if(currentValue.indexOf('.') === -1) {
+                currentValue += '.' 
+            }
+            this.setState(function(){
+                return {
+                    currentValue: currentValue
+                }
+            })
+        }
+
+        if(targetID == 'clear'){
+            this.setState(function(){
+                return {
+                    currentValue: '',
+                    memory: 0,
+                    operationID: 'default'
+                }
+            })
+        }
+
+        if(targetID == 'add'){
+           this.setState(function(){
+                return {
+                    operationID: 'add'
+                }
+           })
+           this.calculate(this.state.operationID)
+        }
+
+        if(targetID == 'subtract'){
+            this.setState(function(){
+                return {
+                    operationID: 'subtract'
+                }
+            })
+            this.calculate(this.state.operationID)
+        }
+
+        if(targetID == 'multiply'){
+            this.setState(function(){
+                return {
+                    operationID: 'multiply'
+                }
+            })
+            this.calculate(this.state.operationID)
+        }
+
+        if(targetID == 'divide'){
+            this.setState(function(){
+                return {
+                    operationID: 'divide'
+                }
+            })
+            this.calculate(this.state.operationID)
+        }
+
+        if(targetID == 'equals'){
+            this.setState(function(){
+                return {
+                    operationID: 'default'
+                }
+            })
+            this.calculate(this.state.operationID)
+        }
     }
 
+    calculate(operationID) {
+        console.log(`Previous operationID: ${this.state.operationID}`)
+        let memory = this.state.memory
+        let current = Number(this.state.currentValue)
+        switch(operationID){
+            case 'add': 
+                this.setState(function(){
+                    return {
+                        memory: memory + current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            case 'subtract': 
+                this.setState(function(){
+                    return {
+                        memory: memory - current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            case 'multiply': 
+                this.setState(function(){
+                    return {
+                        memory: memory * current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            case 'divide': 
+                this.setState(function(){
+                    return {
+                        memory: memory / current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            case 'default': 
+                this.setState(function(){
+                    return {
+                        memory: current,
+                        currentValue: ''
+                    }
+                })
+                break;
+            default: console.log('Error in switch')
+        } 
+    }
 
     render(){
         return (
@@ -43,10 +169,10 @@ export default class JsCalculator extends React.Component{
                 <div className="calculator calculator_theme">
                     <div id="display" className="display">
                         <p className="display__field display__field_theme">
-                            <span className="display__text display_result_theme">{this.state.resultField}</span>
+                            <span className="display__text display_result_theme">{this.state.memory}</span>
                         </p>
                         <p className="display__field display__field_theme">
-                            <span className="display__text display_input_theme">{this.state.inputField.join('')}</span>
+                            <span className="display__text display_input_theme">{this.state.currentValue}</span>
                         </p> 
                     </div>
                     <div className="buttonsContainer" onClick={this.numericButtonCallback}>
