@@ -38,21 +38,22 @@ export default class JsCalculator extends React.Component{
         const currentValue = this.state.currentValue
         const targetID = event.target.getAttribute('id')
 
-        if(+stringValue >= 0 && +stringValue <= 9){
-            if(currentValue[0] == '0' && currentValue.length === 1){
+        if(+stringValue >= 0 && +stringValue <= 9 || stringValue == '-'){
+            if(currentValue[0] == '0' && currentValue.length === 1 || stringValue == '-') {
                 this.setState(function(){
                     return {
                         currentValue: stringValue
                     }
                 })
-            } else if(stringValue !== '0' || stringValue === '0' && currentValue.length === 0) 
-            {
-                this.setState(function(prevState){
+                
+            } else if(stringValue !== '0' || stringValue === '0' && currentValue.length !== 0) {
+                await this.setState(function(prevState){
                     return {
                         currentValue: prevState['currentValue'] + stringValue
                     }
                 })
             }
+            console.log(`Input field: ${this.state.currentValue}`)
         }
 
         if(targetID === 'decimal'){
@@ -89,7 +90,7 @@ export default class JsCalculator extends React.Component{
             this.setState(function(prevState){
                  return {
                      operationID: 'equals',
-                     inputHistory: prevState['inputHistory'] + ` = ${this.state.memory < 1?this.state.memory.toFixed(4):this.state.memory}`
+                     inputHistory: prevState['inputHistory'] + ` = ${!Number.isInteger(this.state.memory)?this.state.memory.toFixed(4):this.state.memory}`
                  }
             })
          }
@@ -109,12 +110,15 @@ export default class JsCalculator extends React.Component{
     calculate(operationID) {
         console.log(`Previous operationID: ${this.state.operationID}`)
         let memory = this.state.memory
-        let current = +this.state.currentValue
+        //Баг при 2 последовательно введённых операциях (++, --, -*||/, +*||/). 
+        //Без тернарки образуется баг Infinity || NaN.
+        let current = this.state.currentValue ? Number(this.state.currentValue):1
+        ///////
         switch(operationID){
             case 'add': 
                 this.setState(function(){
                     return {
-                        memory: memory + current,
+                        memory: (memory) + (current),
                         currentValue: ''
                     }
                 })
@@ -122,7 +126,7 @@ export default class JsCalculator extends React.Component{
             case 'subtract': 
                 this.setState(function(){
                     return {
-                        memory: memory - current,
+                        memory: (memory) - (current),
                         currentValue: ''
                     }
                 })
@@ -130,7 +134,7 @@ export default class JsCalculator extends React.Component{
             case 'multiply': 
                 this.setState(function(){
                     return {
-                        memory: memory * current,
+                        memory: (memory) * (current),
                         currentValue: ''
                     }
                 })
@@ -138,7 +142,7 @@ export default class JsCalculator extends React.Component{
             case 'divide': 
                 this.setState(function(){
                     return {
-                        memory: memory / current,
+                        memory: (memory) / (current),
                         currentValue: ''
                     }
                 })
@@ -146,7 +150,7 @@ export default class JsCalculator extends React.Component{
             case 'default': 
                 this.setState(function(){
                     return {
-                        memory: current,
+                        memory: (current),
                         currentValue: ''
                     }
                 })
@@ -154,7 +158,7 @@ export default class JsCalculator extends React.Component{
             case 'equals': 
                 this.setState(function(){
                     return {
-                        inputHistory: this.state.memory < 1?this.state.memory.toFixed(4):this.state.memory
+                        inputHistory: !Number.isInteger(memory)?memory.toFixed(4):memory
                     }
                 })
                 break;
