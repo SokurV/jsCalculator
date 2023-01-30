@@ -1,3 +1,13 @@
+$color_app_background: #555
+$color_display_background: #000
+$color_button_background: #555
+$color_main: #fff
+$color_main_hover: orange
+$color_button_border: #000
+$color_button_border_hover: #ccc
+$color_button_clear_background: crimson
+$color_button_equals_background: darkblue
+    
 *
     margin: 0
     padding: 0
@@ -11,7 +21,7 @@
     align-items: center
 
 .appContainer_theme
-    background-color: #555
+    background-color: $color_app_background
 
 .calculator
     display: flex
@@ -20,8 +30,8 @@
     max-height: 500px
 
 .calculator_theme
-    background-color: black
-    border: 2px solid orange
+    background-color: $color_button_border
+    border: 2px solid $color_main_hover
 
 .display
     margin: 4px
@@ -35,7 +45,7 @@
     justify-content: center 
 
 .display__field_theme
-    background-color: #555
+    background-color: $color_display_background
 
 .display__text
     display: block
@@ -47,10 +57,10 @@
     font-size: 1.25em
 
 .display_result_theme
-    color: orange
+    color: $color_main_hover
 
 .display_input_theme
-    color: white
+    color: $color_main
 
 .buttonsContainer
     margin: 4px
@@ -75,14 +85,20 @@ $arrayNames: (equals, add, subtract, multiply, divide, decimal, clear)
     justify-content: center
 
 .button_theme
-    background-color: #555
+    background-color: $color_button_background
     border: 1px solid black
-    color: white
+    color: $color_main
     cursor: pointer
 
 .button_theme:hover
-    border: 1px solid #ccc
-    color: orange
+    border: 1px solid $color_button_border_hover
+    color: $color_main_hover
+
+.buttonID_clear
+    background-color: $color_button_clear_background
+
+.buttonID_equals
+    background-color: $color_button_equals_background
 
 
 

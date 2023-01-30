@@ -27,7 +27,7 @@
 }
 
 .calculator_theme {
-  background-color: black;
+  background-color: #000;
   border: 2px solid orange;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .display__field_theme {
-  background-color: #555;
+  background-color: #000;
 }
 
 .display__text {
@@ -64,7 +64,7 @@
 }
 
 .display_input_theme {
-  color: white;
+  color: #fff;
 }
 
 .buttonsContainer {
@@ -151,11 +151,19 @@
 .button_theme {
   background-color: #555;
   border: 1px solid black;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 
 .button_theme:hover {
   border: 1px solid #ccc;
   color: orange;
+}
+
+.buttonID_clear {
+  background-color: crimson;
+}
+
+.buttonID_equals {
+  background-color: darkblue;
 }
