@@ -18,7 +18,7 @@ export default class JsCalculator extends React.Component{
         const NAMES_BUTTON_ID = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
         let exportArr = []
         for(let i = 0; i <= number; i++){
-            exportArr.push(<Button id={NAMES_BUTTON_ID[i]} textContent={i} className={`button button_theme buttonID_${i}`} key={`uniqKey_${i}`}/>)
+            exportArr.push(<Button id={NAMES_BUTTON_ID[i]} textContent={i} className={`button textContent button_theme buttonID_${i}`} key={`uniqKey_${i}`}/>)
         }
         return exportArr
     }
@@ -27,7 +27,7 @@ export default class JsCalculator extends React.Component{
         const NAMES_BUTTON_ID = {'equals':'=', 'add':'+', 'subtract':'-', 'multiply':'X', 'divide':'/', 'decimal':'.', 'clear':'AC'}
         let exportArr = []
         for(let key in NAMES_BUTTON_ID){
-            exportArr.push(<Button id={key} textContent={NAMES_BUTTON_ID[key]} className={`button button_theme buttonID_${key}`} key={`uniqKey_${key}`}/>)
+            exportArr.push(<Button id={key} textContent={NAMES_BUTTON_ID[key]} className={`button textContent button_theme buttonID_${key}`} key={`uniqKey_${key}`}/>)
         }
         return exportArr
     }
@@ -67,8 +67,6 @@ export default class JsCalculator extends React.Component{
                 }
             })
         }
-        
-        
 
         if(['add', 'subtract', 'multiply', 'divide', 'equals'].indexOf(targetID) >= 0){
            this.setState(function(){
@@ -142,10 +140,10 @@ export default class JsCalculator extends React.Component{
                 <div className="calculator calculator_theme">
                     <div id="display" className="display">
                         <p className="display__field display__field_theme">
-                            <span className="display__text display_result_theme">{this.state.memory}</span>
+                            <span className="display__text textContent display_result_theme">{this.state.memory}</span>
                         </p>
                         <p className="display__field display__field_theme">
-                            <span className="display__text display_input_theme">{this.state.currentValue}</span>
+                            <span className="display__text textContent display_input_theme">{this.state.currentValue}</span>
                         </p> 
                     </div>
                     <div className="buttonsContainer" onClick={this.numericButtonCallback}>

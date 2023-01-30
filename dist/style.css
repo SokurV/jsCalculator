@@ -39,6 +39,9 @@
 .display__field {
   width: 338px;
   height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .display__field_theme {
@@ -48,47 +51,26 @@
 .display__text {
   display: block;
   margin-right: 8px;
+  text-align: right;
+}
+
+.textContent {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.25em;
 }
 
 .display_result_theme {
-  text-align: right;
-  font-family: Verdana;
   color: orange;
-  font-size: 1.25em;
 }
 
 .display_input_theme {
-  text-align: right;
-  font-family: Verdana;
   color: white;
-  font-size: 1.25em;
 }
 
 .buttonsContainer {
   margin: 4px;
   display: grid;
   grid-template-areas: "buttonID_clear buttonID_clear buttonID_divide buttonID_multiply" "buttonID_7 buttonID_8 buttonID_9 buttonID_subtract" "buttonID_4 buttonID_5 buttonID_6 buttonID_add" "buttonID_1 buttonID_2 buttonID_3 buttonID_equals" "buttonID_0 buttonID_0 buttonID_decimal buttonID_equals";
-}
-
-.button {
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button_theme {
-  background-color: #555;
-  border: 1px solid black;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.25em;
-  color: white;
-  cursor: pointer;
-}
-
-.button_theme:hover {
-  border: 1px solid #ccc;
-  color: orange;
 }
 
 .buttonID_0 {
@@ -157,4 +139,23 @@
 
 .buttonID_clear {
   grid-area: buttonID_clear;
+}
+
+.button {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_theme {
+  background-color: #555;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+}
+
+.button_theme:hover {
+  border: 1px solid #ccc;
+  color: orange;
 }
