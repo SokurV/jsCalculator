@@ -4,9 +4,10 @@ export default class JsCalculator extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            currentValue: '',
+            currentValue: '0',
             memory: 0,
             operationID: 'default',
+            inputHistory: '',
         }
         this.numericButtonRender = this.numericButtonRender.bind(this)
         this.symbolButtonRender = this.symbolButtonRender.bind(this)
@@ -24,7 +25,7 @@ export default class JsCalculator extends React.Component{
     }
 
     symbolButtonRender(){
-        const NAMES_BUTTON_ID = {'equals':'=', 'add':'+', 'subtract':'-', 'multiply':'X', 'divide':'/', 'decimal':'.', 'clear':'AC'}
+        const NAMES_BUTTON_ID = {'equals':'=', 'add':'+', 'subtract':'-', 'multiply':'x', 'divide':'/', 'decimal':'.', 'clear':'AC'}
         let exportArr = []
         for(let key in NAMES_BUTTON_ID){
             exportArr.push(<Button id={key} textContent={NAMES_BUTTON_ID[key]} className={`button textContent button_theme buttonID_${key}`} key={`uniqKey_${key}`}/>)
@@ -32,56 +33,83 @@ export default class JsCalculator extends React.Component{
         return exportArr
     }
 
-    numericButtonCallback(event){
-        const stringValue = event.target.textContent
-        if(Number(stringValue) >= 0 && Number(stringValue) <= 9){
-            this.setState(function(prevState){
-                return {
-                    currentValue: prevState['currentValue'] + stringValue
-                }
-            })
-        }
-
+    async numericButtonCallback(event){
+        const stringValue = event.target.textContent == '='?'':event.target.textContent
+        const currentValue = this.state.currentValue
         const targetID = event.target.getAttribute('id')
 
-        if(targetID == 'decimal'){
-            let currentValue = this.state.currentValue
-            if(currentValue.length === 0){
-                currentValue = '0.'
-            } else if(currentValue.indexOf('.') === -1) {
-                currentValue += '.' 
+        if(+stringValue >= 0 && +stringValue <= 9){
+            if(currentValue[0] == '0' && currentValue.length === 1){
+                this.setState(function(){
+                    return {
+                        currentValue: stringValue
+                    }
+                })
+            } else if(stringValue !== '0' || stringValue === '0' && currentValue.length === 0) 
+            {
+                this.setState(function(prevState){
+                    return {
+                        currentValue: prevState['currentValue'] + stringValue
+                    }
+                })
             }
-            this.setState(function(){
+        }
+
+        if(targetID === 'decimal'){
+            let localCurrentValue = this.state.currentValue
+            if(localCurrentValue.length === 0){
+                localCurrentValue = '0.'
+            } else if(localCurrentValue.indexOf('.') === -1) {
+                localCurrentValue += '.' 
+            }
+            await this.setState(function(){
                 return {
-                    currentValue: currentValue
+                    currentValue: localCurrentValue
                 }
             })
         }
 
-        if(targetID == 'clear'){
-            this.setState(function(){
-                return {
-                    currentValue: '',
-                    memory: 0,
-                    operationID: 'default'
-                }
-            })
-        }
-
-        if(['add', 'subtract', 'multiply', 'divide', 'equals'].indexOf(targetID) >= 0){
+        if(['add', 'subtract', 'multiply', 'divide'].indexOf(targetID) >= 0){
+           this.calculate(this.state.operationID)
            this.setState(function(){
                 return {
                     operationID: targetID
                 }
            })
-           this.calculate(this.state.operationID)
+        }
+
+        this.setState(function(prevState){
+            return {
+                inputHistory: prevState['inputHistory'] + stringValue
+            }
+        })
+        
+        if(targetID == 'equals'){
+            await this.calculate(this.state.operationID)
+            this.setState(function(prevState){
+                 return {
+                     operationID: 'equals',
+                     inputHistory: prevState['inputHistory'] + ` = ${this.state.memory < 1?this.state.memory.toFixed(4):this.state.memory}`
+                 }
+            })
+         }
+
+        if(targetID == 'clear'){
+            this.setState(function(){
+                return {
+                    currentValue: '0',
+                    memory: 0,
+                    operationID: 'default',
+                    inputHistory: ''
+                }
+            })
         }
     }
 
     calculate(operationID) {
         console.log(`Previous operationID: ${this.state.operationID}`)
         let memory = this.state.memory
-        let current = Number(this.state.currentValue)
+        let current = +this.state.currentValue
         switch(operationID){
             case 'add': 
                 this.setState(function(){
@@ -126,7 +154,7 @@ export default class JsCalculator extends React.Component{
             case 'equals': 
                 this.setState(function(){
                     return {
-                        currentValue: ''
+                        inputHistory: this.state.memory < 1?this.state.memory.toFixed(4):this.state.memory
                     }
                 })
                 break;
@@ -140,7 +168,7 @@ export default class JsCalculator extends React.Component{
                 <div className="calculator calculator_theme">
                     <div id="display" className="display">
                         <p className="display__field display__field_theme">
-                            <span className="display__text textContent display_result_theme">{this.state.memory}</span>
+                            <span className="display__text textContent display_result_theme">{this.state.inputHistory}</span>
                         </p>
                         <p className="display__field display__field_theme">
                             <span className="display__text textContent display_input_theme">{this.state.currentValue}</span>
