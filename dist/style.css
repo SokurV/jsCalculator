@@ -7,15 +7,14 @@
   box-sizing: border-box;
 }
 
-.appContainer {
-  width: 100vw;
+.container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.appContainer_theme {
+.container_style {
   background-color: #555;
 }
 
@@ -24,9 +23,10 @@
   flex-direction: column;
   width: 350px;
   max-height: 500px;
+  margin: 6px;
 }
 
-.calculator_theme {
+.calculator_style {
   background-color: #000;
   border: 2px solid orange;
 }
@@ -37,14 +37,13 @@
 }
 
 .display__field {
-  width: 338px;
   height: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.display__field_theme {
+.display__field_style {
   background-color: #000;
 }
 
@@ -54,90 +53,90 @@
   text-align: right;
 }
 
-.textContent {
+.display__text_style, .button_style {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.25em;
 }
 
-.display_result_theme {
+.display__text_result-style {
   color: orange;
 }
 
-.display_input_theme {
+.display__text_input-style {
   color: #fff;
 }
 
-.buttonsContainer {
+.buttons-container {
   margin: 4px;
   display: grid;
   grid-template-areas: "buttonID_clear buttonID_clear buttonID_divide buttonID_multiply" "buttonID_7 buttonID_8 buttonID_9 buttonID_subtract" "buttonID_4 buttonID_5 buttonID_6 buttonID_add" "buttonID_1 buttonID_2 buttonID_3 buttonID_equals" "buttonID_0 buttonID_0 buttonID_decimal buttonID_equals";
 }
 
-.buttonID_0 {
+.button-id_0 {
   grid-area: buttonID_0;
 }
 
-.buttonID_1 {
+.button-id_1 {
   grid-area: buttonID_1;
 }
 
-.buttonID_2 {
+.button-id_2 {
   grid-area: buttonID_2;
 }
 
-.buttonID_3 {
+.button-id_3 {
   grid-area: buttonID_3;
 }
 
-.buttonID_4 {
+.button-id_4 {
   grid-area: buttonID_4;
 }
 
-.buttonID_5 {
+.button-id_5 {
   grid-area: buttonID_5;
 }
 
-.buttonID_6 {
+.button-id_6 {
   grid-area: buttonID_6;
 }
 
-.buttonID_7 {
+.button-id_7 {
   grid-area: buttonID_7;
 }
 
-.buttonID_8 {
+.button-id_8 {
   grid-area: buttonID_8;
 }
 
-.buttonID_9 {
+.button-id_9 {
   grid-area: buttonID_9;
 }
 
-.buttonID_equals {
+.button-id_equals {
   grid-area: buttonID_equals;
 }
 
-.buttonID_add {
+.button-id_add {
   grid-area: buttonID_add;
 }
 
-.buttonID_subtract {
+.button-id_subtract {
   grid-area: buttonID_subtract;
 }
 
-.buttonID_multiply {
+.button-id_multiply {
   grid-area: buttonID_multiply;
 }
 
-.buttonID_divide {
+.button-id_divide {
   grid-area: buttonID_divide;
 }
 
-.buttonID_decimal {
+.button-id_decimal {
   grid-area: buttonID_decimal;
 }
 
-.buttonID_clear {
+.button-id_clear {
   grid-area: buttonID_clear;
 }
 
@@ -148,22 +147,28 @@
   justify-content: center;
 }
 
-.button_theme {
+.button_style {
   background-color: #555;
   border: 1px solid black;
   color: #fff;
   cursor: pointer;
 }
 
-.button_theme:hover {
+.button_style:hover {
   border: 1px solid #ccc;
   color: orange;
 }
 
-.buttonID_clear {
+.button-id_clear {
   background-color: crimson;
 }
 
-.buttonID_equals {
+.button-id_equals {
   background-color: darkblue;
+}
+
+@media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.1458333333333333), (orientation: landscape) and (min-resolution: 110dpi) {
+  .container {
+    height: 100%;
+  }
 }

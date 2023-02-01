@@ -15,14 +15,13 @@ $font_size: 1.25em
     padding: 0
     box-sizing: border-box
 
-.appContainer
-    width: 100vw
+.container
     height: 100vh
     display: flex
     justify-content: center
     align-items: center
 
-.appContainer_theme
+.container_style
     background-color: $color_app_background
 
 .calculator
@@ -30,8 +29,9 @@ $font_size: 1.25em
     flex-direction: column
     width: 350px
     max-height: 500px
+    margin: 6px
 
-.calculator_theme
+.calculator_style
     background-color: $color_button_border
     border: 2px solid $color_main_hover
 
@@ -40,13 +40,12 @@ $font_size: 1.25em
     margin-bottom: 0px
 
 .display__field
-    width: 338px
     height: 36px
     display: flex
     flex-direction: column
     justify-content: center 
 
-.display__field_theme
+.display__field_style
     background-color: $color_display_background
 
 .display__text
@@ -54,30 +53,30 @@ $font_size: 1.25em
     margin-right: 8px
     text-align: right
 
-.textContent
+.display__text_style
     font-family: $font_family
     font-size: $font_size
 
-.display_result_theme
+.display__text_result-style
     color: $color_main_hover
 
-.display_input_theme
+.display__text_input-style
     color: $color_main
 
-.buttonsContainer
+.buttons-container
     margin: 4px
     display: grid
     grid-template-areas: "buttonID_clear buttonID_clear buttonID_divide buttonID_multiply" "buttonID_7 buttonID_8 buttonID_9 buttonID_subtract" "buttonID_4 buttonID_5 buttonID_6 buttonID_add" "buttonID_1 buttonID_2 buttonID_3 buttonID_equals" "buttonID_0 buttonID_0 buttonID_decimal buttonID_equals"
 
 //Генерирую классы для кнопок цифр от 0 до 9
 @for $i from 0 through 9 
-    .buttonID_#{$i}
+    .button-id_#{$i}
         grid-area: buttonID_#{$i}
 
 //Генерирую классы для кнопок операций из массива имён
 $arrayNames: (equals, add, subtract, multiply, divide, decimal, clear)
 @each $name in $arrayNames
-    .buttonID_#{$name}
+    .button-id_#{$name}
         grid-area: buttonID_#{$name}
 
 .button
@@ -86,23 +85,28 @@ $arrayNames: (equals, add, subtract, multiply, divide, decimal, clear)
     align-items: center
     justify-content: center
 
-.button_theme
+.button_style
+    @extend .display__text_style
     background-color: $color_button_background
     border: 1px solid black
     color: $color_main
     cursor: pointer
 
-.button_theme:hover
+.button_style:hover
     border: 1px solid $color_button_border_hover
     color: $color_main_hover
 
-.buttonID_clear
+.button-id_clear
     background-color: $color_button_clear_background
 
-.buttonID_equals
+.button-id_equals
     background-color: $color_button_equals_background
 
-
+//Правильное заполнение фона на смартфонах 
+//в горизонтальном положении
+@media (orientation: landscape) and (min-resolution: 110dpi)
+    .container
+        height: 100%
 
 
 
